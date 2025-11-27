@@ -22,7 +22,7 @@
 Run the following commands to set up infra:
 
 - `tofu init`
-- `tofu plan`
+- `make validate plan`
 - `tofu apply`
 
 Run the following commands to tear down:
