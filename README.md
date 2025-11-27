@@ -9,6 +9,10 @@
 > - `aws-cli`
 > - `opentofu`
 
+## Architecture Diagram
+
+![architectural-diagram](./assets/images/ciot-architecture-diagram.png)
+
 ## Setup Procedure
 
 > [!NOTE]
