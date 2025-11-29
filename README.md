@@ -22,10 +22,11 @@
 Run the following commands to set up infra:
 
 - `tofu init`
-- `make validate plan`
-- `tofu apply`
+- `make validate`
+- `make plan`
+- `make apply`
 
 Run the following commands to tear down:
 
 - `tofu plan -destroy`
-- `tofu destroy`
+- `make destroy`
