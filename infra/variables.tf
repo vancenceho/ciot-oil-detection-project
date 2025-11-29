@@ -33,3 +33,10 @@ variable "availability_zones" {
     type = list(string)
     default = ["ap-southeast-1a", "ap-southeast-1b"]
 }
+
+variable "db_password" {
+    description = "Master password for RDS database (not used when manage_master_user_password is true - AWS generates password automatically)"
+    type = string
+    sensitive = true
+    default = null
+}
