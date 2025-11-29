@@ -5,3 +5,9 @@ validate:
 
 plan: 
 	tofu plan
+
+apply: 
+	tofu apply
+
+destroy:
+	tofu destroy
