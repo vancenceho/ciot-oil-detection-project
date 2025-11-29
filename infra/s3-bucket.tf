@@ -1,6 +1,7 @@
 # S3 bucket 
 resource "aws_s3_bucket" "buoy_data" {
   bucket = "ciot-buoy-data-${var.environment}"
+  force_destroy = true
 }
 
 # "raw/" folder
