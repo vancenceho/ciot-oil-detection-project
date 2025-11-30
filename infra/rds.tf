@@ -35,6 +35,53 @@ resource "aws_db_subnet_group" "main" {
   }
 }
 
+# RDS PostgreSQL Instance
+resource "aws_db_instance" "main" {
+    identifier = "ciot-db-${var.environment}"
+    
+    # Engine Configuration
+    engine         = "postgres"
+    instance_class = "db.t3.micro"
+    
+    # Database Configuration
+    db_name  = "ciotdb"
+    username = "ciotadmin"
+    port     = 5432
+    
+    # Use AWS Secrets Manager to automatically manage the password
+    # AWS will create a secret automatically and rotate it
+    manage_master_user_password = true
+    master_user_secret_kms_key_id = "alias/aws/secretsmanager"
+    
+    # Storage Configuration
+    allocated_storage     = 20
+    max_allocated_storage = 100
+    storage_type          = "gp3"
+    storage_encrypted     = true
+    
+    # Network Configuration
+    db_subnet_group_name   = aws_db_subnet_group.main.name
+    vpc_security_group_ids = [aws_security_group.rds.id]
+    publicly_accessible    = false
+    
+    # Backup Configuration
+    backup_retention_period = 1
+    backup_window          = "03:00-04:00"
+    maintenance_window     = "mon:04:00-mon:05:00"
+    
+    # High Availability
+    multi_az = false
+    
+    # Deletion Protection
+    deletion_protection = false
+    skip_final_snapshot = true
+    
+    tags = {
+        Name        = "ciot-rds-${var.environment}"
+        Environment = var.environment
+    }
+}
+
 # Note: Glue Connection for RDS should be created after RDS instance is set up
 # See rds.tf or glue.tf for the connection configuration
 # Glue will create ENIs in the private subnets to access RDS via VPC internal routing
