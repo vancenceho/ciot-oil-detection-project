@@ -19,7 +19,7 @@ variable "lambda_handler" {
 variable "lambda_filename" {
     description = "lambda deployment package filename" 
     type = string
-    default = "lambda_ingest.zip"
+    default = "scripts/lambda_ingest.zip"
 }
 
 variable "vpc_cidr" {
