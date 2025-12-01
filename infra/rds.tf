@@ -5,11 +5,11 @@ resource "aws_security_group" "rds" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description     = "PostgreSQL from VPC"
-    from_port       = 5432
-    to_port         = 5432
-    protocol        = "tcp"
-    cidr_blocks     = [var.vpc_cidr]
+    description = "PostgreSQL from VPC"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr]
   }
 
   egress {
@@ -25,6 +25,17 @@ resource "aws_security_group" "rds" {
   }
 }
 
+# Ingress rule for RDS from Glue (added separately to avoid cycle)
+resource "aws_security_group_rule" "rds_from_glue" {
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.glue.id
+  security_group_id        = aws_security_group.rds.id
+  description              = "PostgreSQL from Glue"
+}
+
 # DB Subnet Group (required for RDS)
 resource "aws_db_subnet_group" "main" {
   name       = "ciot-db-subnet-group-${var.environment}"
@@ -33,6 +44,21 @@ resource "aws_db_subnet_group" "main" {
   tags = {
     Name = "ciot-db-subnet-group-${var.environment}"
   }
+}
+
+# Data source to read pre-created secret from Secrets Manager
+# Based on approach from: https://github.com/cthdarren/50046-iot-project
+# Run setup-secrets.sh BEFORE terraform apply to create this secret
+data "aws_secretsmanager_secret" "rds_credentials" {
+  name = "ciot-rds-credentials"
+}
+
+data "aws_secretsmanager_secret_version" "rds_credentials" {
+  secret_id = data.aws_secretsmanager_secret.rds_credentials.id
+}
+
+locals {
+  rds_credentials = jsondecode(data.aws_secretsmanager_secret_version.rds_credentials.secret_string)
 }
 
 # RDS PostgreSQL Instance
@@ -45,13 +71,9 @@ resource "aws_db_instance" "main" {
     
     # Database Configuration
     db_name  = "ciotdb"
-    username = "ciotadmin"
+    username = local.rds_credentials.username
+    password = local.rds_credentials.password
     port     = 5432
-    
-    # Use AWS Secrets Manager to automatically manage the password
-    # AWS will create a secret automatically and rotate it
-    manage_master_user_password = true
-    master_user_secret_kms_key_id = "alias/aws/secretsmanager"
     
     # Storage Configuration
     allocated_storage     = 20

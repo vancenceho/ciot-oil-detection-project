@@ -24,3 +24,17 @@ resource "aws_s3_object" "processed_prefix" {
   key = "processed/"  # data coming out from AWS Glue
   acl = "private"
 }
+
+# "scripts/" folder for Glue job scripts
+resource "aws_s3_object" "scripts_prefix" {
+  bucket = aws_s3_bucket.buoy_data.id
+  key = "scripts/"
+  acl = "private"
+}
+
+# "temp/" folder for Glue temporary files
+resource "aws_s3_object" "temp_prefix" {
+  bucket = aws_s3_bucket.buoy_data.id
+  key = "temp/"
+  acl = "private"
+}

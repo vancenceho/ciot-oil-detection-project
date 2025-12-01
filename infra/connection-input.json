@@ -1,0 +1,16 @@
+﻿{
+    "ConnectionType":  "JDBC",
+    "ConnectionProperties":  {
+                                 "USERNAME":  "ciotadmin",
+                                 "PASSWORD":  "2f_)Yf9OD\u003eqi#H06rd6x88kr*A0c",
+                                 "JDBC_CONNECTION_URL":  "jdbc:postgresql://ciot-db-dev.cfycw6w6k84c.ap-southeast-1.rds.amazonaws.com:5432/ciotdb"
+                             },
+    "Name":  "ciot-rds-connection-dev",
+    "PhysicalConnectionRequirements":  {
+                                           "SecurityGroupIdList":  [
+                                                                       "sg-0f224f7560ec10585"
+                                                                   ],
+                                           "SubnetId":  "subnet-0a512819d0cb1be4e",
+                                           "AvailabilityZone":  "ap-southeast-1a"
+                                       }
+}
