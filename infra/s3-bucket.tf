@@ -1,6 +1,6 @@
 # S3 bucket 
 resource "aws_s3_bucket" "buoy_data" {
-  bucket = "ciot-buoy-data-${var.environment}"
+  bucket = "ciot-buoy-data-${var.environment}-test"
   force_destroy = true
 }
 

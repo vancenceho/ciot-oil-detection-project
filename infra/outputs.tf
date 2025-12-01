@@ -28,6 +28,6 @@ output "rds_database_name" {
 
 output "rds_master_user_secret_arn" {
     description = "ARN of the secret in AWS Secrets Manager containing the master password"
-    value       = aws_db_instance.main.master_user_secret[0].secret_arn
+    value       = data.aws_secretsmanager_secret.rds_credentials.arn
     sensitive   = true
 }

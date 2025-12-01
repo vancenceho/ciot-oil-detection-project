@@ -19,7 +19,7 @@ variable "lambda_handler" {
 variable "lambda_filename" {
     description = "lambda deployment package filename" 
     type = string
-    default = "lambda_ingest.zip"
+    default = "scripts/lambda_ingest.zip"
 }
 
 variable "vpc_cidr" {
@@ -35,7 +35,7 @@ variable "availability_zones" {
 }
 
 variable "db_password" {
-    description = "Master password for RDS database (not used when manage_master_user_password is true - AWS generates password automatically)"
+    description = "Master password for RDS database (deprecated - password is now managed via Secrets Manager. Run ./scripts/setup-secrets.sh to create the secret)"
     type = string
     sensitive = true
     default = null
