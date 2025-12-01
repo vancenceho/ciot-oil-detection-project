@@ -1,4 +1,4 @@
-.PHONY: validate plan
+.PHONY: validate plan apply destroy setup-secrets check-status
 
 validate: 
 	tofu validate

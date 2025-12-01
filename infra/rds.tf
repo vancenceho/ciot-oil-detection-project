@@ -45,13 +45,12 @@ resource "aws_db_instance" "main" {
     
     # Database Configuration
     db_name  = "ciotdb"
-    username = "ciotadmin"
+    username = local.rds_credentials.username
+    password = local.rds_credentials.password
     port     = 5432
     
-    # Use AWS Secrets Manager to automatically manage the password
-    # AWS will create a secret automatically and rotate it
-    manage_master_user_password = true
-    master_user_secret_kms_key_id = "alias/aws/secretsmanager"
+    # Use manually created secret from setup-secrets.sh
+    # Run ./scripts/setup-secrets.sh before terraform apply
     
     # Storage Configuration
     allocated_storage     = 20
