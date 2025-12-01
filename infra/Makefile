@@ -1,4 +1,4 @@
-.PHONY: validate plan apply destroy setup-secrets check-status
+.PHONY: validate plan apply destroy setup-secrets check-status pre-deployment
 
 validate: 
 	tofu validate
@@ -19,3 +19,7 @@ setup-secrets:
 check-status:
 	chmod +x scripts/check-status.sh
 	./scripts/check-status.sh
+
+pre-deployment:
+	chmod +x scripts/validate-pre-deployment.sh
+	./scripts/validate-pre-deployment.sh
