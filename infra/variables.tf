@@ -40,3 +40,28 @@ variable "db_password" {
     sensitive = true
     default = null
 }
+
+# ECS Configuration
+variable "ecs_task_cpu" {
+    description = "CPU units for ECS task (256, 512, 1024, 2048, 4096)"
+    type = number
+    default = 512
+}
+
+variable "ecs_task_memory" {
+    description = "Memory in MB for ECS task"
+    type = number
+    default = 2048
+}
+
+variable "ecs_desired_count" {
+    description = "Desired number of ECS tasks"
+    type = number
+    default = 1
+}
+
+variable "backend_port" {
+    description = "Port for backend service"
+    type = number
+    default = 8080
+}
