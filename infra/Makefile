@@ -1,4 +1,4 @@
-.PHONY: help init plan apply destroy validate fmt output clean check-drift logs status
+.PHONY: help init plan plan-destroy apply destroy validate fmt output clean check-drift logs status
 
 # Configuration
 REGION ?= ap-southeast-1
@@ -44,6 +44,13 @@ plan: ## Show execution plan
 	@echo "$(YELLOW)Creating execution plan...$(NC)"
 	tofu plan
 	@echo "$(GREEN)✓ Plan complete$(NC)"
+
+plan-destroy: ## Preview what will be destroyed (safe, read-only)
+	@echo "$(YELLOW)Previewing destroy plan...$(NC)"
+	@echo "$(RED)This will show what resources will be destroyed$(NC)"
+	@echo ""
+	tofu plan -destroy
+	@echo "$(GREEN)✓ Destroy plan preview complete$(NC)"
 
 apply: ## Apply infrastructure changes
 	@echo "$(YELLOW)Applying infrastructure changes...$(NC)"
