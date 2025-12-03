@@ -43,7 +43,7 @@ print_info() {
     echo "  $1"
 }
 
-echo "Step 1: Checking prerequisites..."
+echo -e "${YELLOW}Step 1: Checking prerequisites...${NC}"
 echo "-------------------------------------------"
 
 # Check if AWS CLI is installed
@@ -79,7 +79,7 @@ else
 fi
 
 echo ""
-echo "Step 2: Validating AWS credentials..."
+echo -e "${YELLOW}Step 2: Validating AWS credentials...${NC}"
 echo "-------------------------------------------"
 
 # Check if AWS credentials are configured
@@ -96,7 +96,7 @@ else
 fi
 
 echo ""
-echo "Step 3: Checking RDS credentials secret..."
+echo -e "${YELLOW}Step 3: Checking RDS credentials secret...${NC}"
 echo "-------------------------------------------"
 
 # Check if RDS credentials secret exists
@@ -125,7 +125,7 @@ else
     print_info "You must create this secret before running tofu apply."
     print_info "Run the following command:"
     echo ""
-    echo -e "${YELLOW}./scripts/setup-secrets.sh${NC}"
+    echo -e "${YELLOW}make setup-secrets${NC}"
     echo ""
     print_warning "Or manually create the secret using AWS CLI:"
     echo ""
@@ -138,7 +138,7 @@ else
 fi
 
 echo ""
-echo "Step 4: Checking Terraform/OpenTofu state..."
+echo -e "${YELLOW}Step 4: Checking Terraform/OpenTofu state...${NC}"
 echo "-------------------------------------------"
 
 cd "$INFRA_DIR"
@@ -164,7 +164,7 @@ else
 fi
 
 echo ""
-echo "Step 5: Validating Terraform/OpenTofu configuration..."
+echo -e "${YELLOW}Step 5: Validating Terraform/OpenTofu configuration...${NC}"
 echo "-------------------------------------------"
 
 # Run tofu/terraform validate (only if initialized)
@@ -194,7 +194,7 @@ fi
 
 echo ""
 echo "=============================================="
-echo "Summary"
+echo -e "${YELLOW}Summary${NC}"
 echo "=============================================="
 echo ""
 
@@ -207,7 +207,7 @@ if [ $CHECKS_FAILED -eq 0 ]; then
     if [ ! -d ".terraform" ]; then
         echo "  tofu init                    # Initialize Terraform/OpenTofu"
     fi
-    echo "  ./scripts/setup-secrets.sh     # Create RDS credentials secret (if not done)"
+    echo "  make setup-secrets             # Create RDS credentials secret (if not done)"
     echo "  make plan                      # Review the deployment plan"
     echo "  make apply                     # Deploy to AWS"
     echo ""
