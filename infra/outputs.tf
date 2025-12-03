@@ -54,3 +54,13 @@ output "backend_api_url" {
     description = "Full URL for ESP32 to send data"
     value       = "http://${aws_lb.backend.dns_name}"
 }
+
+output "frontend_url" {
+    description = "Frontend application URL"
+    value       = "http://${aws_lb.backend.dns_name}"
+}
+
+output "ecr_frontend_repository_url" {
+    description = "URL of the frontend ECR repository"
+    value       = aws_ecr_repository.frontend.repository_url
+}

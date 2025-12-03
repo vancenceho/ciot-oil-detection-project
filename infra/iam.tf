@@ -81,7 +81,10 @@ resource "aws_iam_role_policy" "ecs_execution_role_policy" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
-        Resource = "${aws_cloudwatch_log_group.backend.arn}:*"
+        Resource = [
+          "${aws_cloudwatch_log_group.backend.arn}:*",
+          "${aws_cloudwatch_log_group.frontend.arn}:*"
+        ]
       },
       {
         Effect = "Allow"
@@ -141,7 +144,10 @@ resource "aws_iam_role_policy" "ecs_task_role_policy" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
-        Resource = "${aws_cloudwatch_log_group.backend.arn}:*"
+        Resource = [
+          "${aws_cloudwatch_log_group.backend.arn}:*",
+          "${aws_cloudwatch_log_group.frontend.arn}:*"
+        ]
       },
       {
         Effect = "Allow"

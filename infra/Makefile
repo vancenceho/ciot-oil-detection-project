@@ -69,8 +69,17 @@ output-summary: ## Show summary of key outputs
 	@echo ""
 	@echo "$(BLUE)=== Key Infrastructure Outputs ===$(NC)"
 	@echo ""
+	@echo "$(YELLOW)Frontend URL:$(NC)"
+	@tofu output -raw frontend_url 2>/dev/null || echo "  Not available"
+	@echo ""
 	@echo "$(YELLOW)API Gateway URL:$(NC)"
 	@tofu output -raw ingest_api_url 2>/dev/null || echo "  Not available"
+	@echo ""
+	@echo "$(YELLOW)Backend API URL:$(NC)"
+	@tofu output -raw backend_api_url 2>/dev/null || echo "  Not available"
+	@echo ""
+	@echo "$(YELLOW)ECS Cluster Name:$(NC)"
+	@tofu output -raw ecs_cluster_name 2>/dev/null || echo "  Not available"
 	@echo ""
 	@echo "$(YELLOW)RDS Endpoint:$(NC)"
 	@tofu output -raw rds_endpoint 2>/dev/null || echo "  Not available"
@@ -111,10 +120,21 @@ setup-secrets: ## Create RDS credentials secret in AWS Secrets Manager
 	@chmod +x scripts/setup-secrets.sh
 	@./scripts/setup-secrets.sh
 
-push-docker: ## Build and push Docker image to ECR
+push-backend: ## Build and push Docker image to ECR
 	@echo "$(YELLOW)Building and pushing Docker image...$(NC)"
 	@chmod +x scripts/push-docker-image.sh
 	@./scripts/push-docker-image.sh
+
+push-frontend: ## Build and push Frontend Docker image to ECR
+	@echo "$(YELLOW)Building and pushing Frontend Docker image...$(NC)"
+	@chmod +x scripts/push-frontend-image.sh
+	@./scripts/push-frontend-image.sh
+
+deploy-all: ## Deploy all services
+	@echo "$(YELLOW)Deploying all services...$(NC)"
+	@$(MAKE) push-backend
+	@$(MAKE) push-frontend
+	@echo "$(GREEN)✓ Deployment complete$(NC)"
 
 logs-lambda: ## View Lambda function logs
 	@echo "$(YELLOW)Fetching Lambda logs...$(NC)"

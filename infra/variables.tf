@@ -65,3 +65,21 @@ variable "backend_port" {
     type = number
     default = 8080
 }
+
+variable "frontend_port" {
+    description = "Port for frontend service"
+    type = number
+    default = 80
+}
+
+variable "frontend_task_cpu" {
+    description = "CPU units for frontend ECS task"
+    type = number
+    default = 256
+}
+
+variable "frontend_task_memory" {
+    description = "Memory in MB for frontend ECS task"
+    type = number
+    default = 512
+}
