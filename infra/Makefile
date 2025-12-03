@@ -233,6 +233,47 @@ info: ## Display project information
 	@echo "  - RDS Database: ciot-db-$(ENVIRONMENT)"
 	@echo "  - S3 Bucket: ciot-buoy-data-$(ENVIRONMENT)-test"
 	@echo "  - VPC: ciot-vpc-$(ENVIRONMENT)"
+	@echo "  - ECS Cluster: ciot-cluster-$(ENVIRONMENT)"
+	@echo "  - Backend Service: ciot-backend-service-$(ENVIRONMENT)"
+	@echo "  - Frontend Service: ciot-frontend-service-$(ENVIRONMENT)"
+	@echo ""
+	@echo "$(YELLOW)Key Infrastructure Outputs:$(NC)"
+	@FRONTEND_URL=$$(tofu output -raw frontend_url 2>/dev/null) && \
+	if [ -n "$$FRONTEND_URL" ]; then \
+		echo "  - Frontend URL: $$FRONTEND_URL"; \
+	else \
+		echo "  - Frontend URL: Not available"; \
+	fi
+	@BACKEND_URL=$$(tofu output -raw backend_api_url 2>/dev/null) && \
+	if [ -n "$$BACKEND_URL" ]; then \
+		echo "  - Backend API URL: $$BACKEND_URL"; \
+	else \
+		echo "  - Backend API URL: Not available"; \
+	fi
+	@CLUSTER_NAME=$$(tofu output -raw ecs_cluster_name 2>/dev/null) && \
+	if [ -n "$$CLUSTER_NAME" ]; then \
+		echo "  - ECS Cluster Name: $$CLUSTER_NAME"; \
+	else \
+		echo "  - ECS Cluster Name: Not available"; \
+	fi
+	@ALB_DNS=$$(tofu output -raw alb_dns_name 2>/dev/null) && \
+	if [ -n "$$ALB_DNS" ]; then \
+		echo "  - ALB DNS Name: $$ALB_DNS"; \
+	else \
+		echo "  - ALB DNS Name: Not available"; \
+	fi
+	@API_GATEWAY=$$(tofu output -raw ingest_api_url 2>/dev/null) && \
+	if [ -n "$$API_GATEWAY" ]; then \
+		echo "  - API Gateway URL: $$API_GATEWAY"; \
+	else \
+		echo "  - API Gateway URL: Not available"; \
+	fi
+	@RDS_ENDPOINT=$$(tofu output -raw rds_endpoint 2>/dev/null) && \
+	if [ -n "$$RDS_ENDPOINT" ]; then \
+		echo "  - RDS Endpoint: $$RDS_ENDPOINT"; \
+	else \
+		echo "  - RDS Endpoint: Not available"; \
+	fi
 	@echo ""
 	@echo "$(YELLOW)Secrets:$(NC)"
 	@echo "  - RDS Credentials: ciot-rds-credentials"
