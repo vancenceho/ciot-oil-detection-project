@@ -78,6 +78,14 @@ if [ ! -f "$FRONTEND_DIR/dockerfile" ]; then
     exit 1
 fi
 
+# Generate tags
+TIMESTAMP_TAG=$(date +%Y%m%d-%H%M%S)
+GIT_SHA_TAG=""
+if command -v git &> /dev/null && [ -d "$PROJECT_ROOT/.git" ]; then
+    cd "$PROJECT_ROOT"
+    GIT_SHA_TAG=$(git rev-parse --short HEAD 2>/dev/null || echo "")
+fi
+
 # Build image with API URL as build arg
 IMAGE_TAG="latest"
 if [ -n "$API_URL" ]; then
@@ -95,10 +103,27 @@ fi
 echo -e "${GREEN}✓ Docker image built${NC}"
 echo ""
 
-# Push image
-echo -e "${YELLOW}Pushing image to ECR...${NC}"
-docker push "$ECR_REPO_URL:$IMAGE_TAG"
-echo -e "${GREEN}✓ Image pushed to ECR${NC}"
+# Tag image with multiple tags
+echo -e "${YELLOW}Tagging image...${NC}"
+docker tag "$ECR_REPO_URL:$IMAGE_TAG" "$ECR_REPO_URL:latest"
+docker tag "$ECR_REPO_URL:$IMAGE_TAG" "$ECR_REPO_URL:$TIMESTAMP_TAG"
+if [ -n "$GIT_SHA_TAG" ]; then
+    docker tag "$ECR_REPO_URL:$IMAGE_TAG" "$ECR_REPO_URL:$GIT_SHA_TAG"
+    echo -e "${GREEN}✓ Image tagged: latest, $TIMESTAMP_TAG, $GIT_SHA_TAG${NC}"
+else
+    echo -e "${GREEN}✓ Image tagged: latest, $TIMESTAMP_TAG${NC}"
+    echo -e "${YELLOW}⚠ Git SHA tag not available (not in git repo or git not installed)${NC}"
+fi
+echo ""
+
+# Push all tags
+echo -e "${YELLOW}Pushing images to ECR...${NC}"
+docker push "$ECR_REPO_URL:latest"
+docker push "$ECR_REPO_URL:$TIMESTAMP_TAG"
+if [ -n "$GIT_SHA_TAG" ]; then
+    docker push "$ECR_REPO_URL:$GIT_SHA_TAG"
+fi
+echo -e "${GREEN}✓ Images pushed to ECR${NC}"
 echo ""
 
 # Force ECS service update
@@ -117,6 +142,14 @@ echo ""
 echo -e "${BLUE}=== Deployment Complete ===${NC}"
 echo ""
 echo "Your frontend service is being updated with the new Docker image."
+echo ""
+echo "Image tags pushed:"
+echo "  - latest"
+echo "  - $TIMESTAMP_TAG"
+if [ -n "$GIT_SHA_TAG" ]; then
+    echo "  - $GIT_SHA_TAG"
+fi
+echo ""
 echo "Check status with:"
 echo "  aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --region $REGION"
 echo ""
