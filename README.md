@@ -39,10 +39,10 @@ To execute this project we have come up with the following solution:
 - REST API for processing S3 object raw data
 - Health checks and sensor readings endpoint
 
-|   Description   |       Paths        |
-| :-------------: | :----------------: |
-|     Health      |     `/health`      |
-|  DB Connection  |    `/db-health`    |
+| Description     | Paths              |
+| :-------------- | :----------------- |
+| Health          | `/health`          |
+| DB Connection   | `/db-health`       |
 | Sensor Readings | `/readings-latest` |
 
 2. Lambda Function
@@ -267,19 +267,19 @@ cd backend
 >
 > The following commands are used together with prefix `make`
 
-|     Commands      |            Description             |
-| :---------------: | :--------------------------------: |
-|      `help`       |         View all commands          |
-|   `deploy-all`    |        Deploy all services         |
+|     Commands      | Description                        |
+| :---------------: | :--------------------------------- |
+|      `help`       | View all commands                  |
+|   `deploy-all`    | Deploy all services                |
 |  `push-backend`   | Deploy Python backend service only |
-|  `push-frontend`  |    Deploy frontend service only    |
-|     `status`      |       Status of all services       |
-| `status-backend`  |       Backend service status       |
-| `status-frontend` |      Frontend service status       |
-|  `health-check`   |           Test endpoints           |
-|  `logs-backend`   |        Stream backend logs         |
-|  `logs-frontend`  |        Stream frontend logs        |
-|   `list-images`   |         Recent ECR images          |
+|  `push-frontend`  | Deploy frontend service only       |
+|     `status`      | Status of all services             |
+| `status-backend`  | Backend service status             |
+| `status-frontend` | Frontend service status            |
+|  `health-check`   | Test endpoints                     |
+|  `logs-backend`   | Stream backend logs                |
+|  `logs-frontend`  | Stream frontend logs               |
+|   `list-images`   | Recent ECR images                  |
 
 ## Infrastructure Management
 
@@ -293,18 +293,18 @@ cd infra
 >
 > The following commands are used together with prefix `make`
 
-|     Commands     |         Description         |
-| :--------------: | :-------------------------: |
-|      `help`      |      View all commands      |
-|      `init`      |    Initialize Terraform     |
-|      `plan`      |       Preview changes       |
-|     `apply`      |    Deploy infrastructure    |
-|    `destroy`     |   Destroy infrastructure    |
-|     `output`     |        Show outputs         |
-| `output-summary` |      Show key outputs       |
+|     Commands     | Description                 |
+| :--------------: | :-------------------------- |
+|      `help`      | View all commands           |
+|      `init`      | Initialize Terraform        |
+|      `plan`      | Preview changes             |
+|     `apply`      | Deploy infrastructure       |
+|    `destroy`     | Destroy infrastructure      |
+|     `output`     | Show outputs                |
+| `output-summary` | Show key outputs            |
 |     `status`     | Check infrastructure status |
 |  `check-health`  | Check infrastrcuture status |
-|  `logs-lambda`   |      View lambda logs       |
+|  `logs-lambda`   | View lambda logs            |
 
 ### Infrastructure Updates
 
