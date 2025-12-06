@@ -49,45 +49,46 @@ An IoT oil detection system to analyze oil contents at the surface of a water bo
 
 - **AWS CLI** (v2.x recommended)
 
-  ```zsh
-  aws --version
-  ```
+```zsh
+aws --version
+```
 
 - **Docker** (v20.x or higher)
 
-  ```zsh
-  docker --version
-  ```
+```zsh
+docker --version
+```
 
 - **Terraform/OpenTofu**
 
-  > [!NOTE]
-  >
-  > Infrastructure has already been implemented  
-  > Check out [INFRA.md](./infra/INFRA.md) for more details.
+> [!NOTE]
+>
+> Infrastructure has already been implemented  
+> Check out [INFRA.md](./infra/INFRA.md) for more details.
 
-  ```zsh
-  # Terraform
-  terraform --version
+```zsh
+# Terraform
+terraform --version
 
-  # OpenTofu
-  tofu --version
-  ```
+# OpenTofu
+tofu --version
+```
 
 - **Make**
 
-  > [!NOTE]
-  >
-  > Usually pre-installed on Linux/Mac
+> [!NOTE]
+>
+> Usually pre-installed on Linux/Mac
 
-  ```zsh
-  make --version
-  ```
+```zsh
+make --version
+```
 
 - **Node.js** (v18+ for frontend builds)
-  ```bash
-  node --version
-  ```
+
+```zsh
+node --version
+```
 
 ### AWS Configuration
 
