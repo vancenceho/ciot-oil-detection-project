@@ -26,7 +26,7 @@ Complete guide for deploying and managing the IoT oil detection system.
 
 ## 🎯 Project Overview
 
-A IoT oil detection system to analyze oil contents at the surface of a water body.
+An IoT oil detection system to analyze oil contents at the surface of a water body.
 
 **System Components**:
 
@@ -61,8 +61,8 @@ A IoT oil detection system to analyze oil contents at the surface of a water bod
 
 - **Terraform/OpenTofu**
 
-  > [!NOTE]
-  > Infrastructure has already been implemented
+  > [!NOTE]  
+  > Infrastructure has already been implemented  
   > Check out [INFRA.md](./infra/INFRA.md) for more details.
 
   ```zsh
@@ -75,7 +75,7 @@ A IoT oil detection system to analyze oil contents at the surface of a water bod
 
 - **Make**
 
-  > [!NOTE]
+  > [!NOTE]  
   > Usually pre-installed on Linux/Mac
 
   ```zsh
@@ -89,7 +89,7 @@ A IoT oil detection system to analyze oil contents at the surface of a water bod
 
 ### AWS Configuration
 
-> [!TIP]
+> [!TIP]  
 > Ensure your AWS credentials are configured by running:  
 > `aws configure list`
 > or
@@ -137,7 +137,7 @@ Your IAM user/role needs the following permissions:
 
 **1. Create RDS Credentials Secret**
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > Do this FIRST before running Terraform or OpenTofu!
 
 ```zsh
