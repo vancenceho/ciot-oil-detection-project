@@ -52,7 +52,7 @@ To execute this project we have come up with the following solution:
 
 ## Quick Start
 
-For detailed instructions, check out [DEPLOYMENT.md](./DEPLOYMENT.md)
+For detailed instructions, check out [QUICKSTART.md](./QUICK-START.md)
 
 ### Prerequisites
 
@@ -438,8 +438,8 @@ ciot-oil-detection-project/
 
 ## Documentation
 
-- [QUICK-START.md](DEPLOYMENT.md)
-- [infra/INFR_README.md]()
+- [QUICK-START.md](./QUICK-START.md)
+- [infra/INFR.md](./infra/INFRA.md)
 
 ## Key Configuration
 
@@ -478,12 +478,12 @@ Checkout [Infrastructure Management](#infrastructure-management) for more detail
 
 > [!TIP]
 >
-> - Keep [QUICK-START.md](./DEPLOYMENT.md) open while working
+> - Keep [QUICK-START.md](./QUICK-START.md) open while working
 > - Use `make help` to see available commands
 > - Monitor deployments with `make status-backend/frontend`
 > - Always run `make health-check` after deploying
 
-**For a detailed quick startup instruction, see [QUICK-START.md](DEPLOYMENT.md)**
+**For a detailed quick startup instruction, see [QUICK-START.md](./QUICK-START.md)**
 
 ---
 
