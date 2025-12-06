@@ -61,7 +61,8 @@ An IoT oil detection system to analyze oil contents at the surface of a water bo
 
 - **Terraform/OpenTofu**
 
-  > [!NOTE]  
+  > [!NOTE]
+  >
   > Infrastructure has already been implemented  
   > Check out [INFRA.md](./infra/INFRA.md) for more details.
 
@@ -75,7 +76,8 @@ An IoT oil detection system to analyze oil contents at the surface of a water bo
 
 - **Make**
 
-  > [!NOTE]  
+  > [!NOTE]
+  >
   > Usually pre-installed on Linux/Mac
 
   ```zsh
