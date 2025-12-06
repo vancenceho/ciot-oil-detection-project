@@ -47,7 +47,7 @@ ALL_GOOD=0
 
 # 1. RDS PostgreSQL Database
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "1. RDS PostgreSQL Database"
+echo -e "${YELLOW}1. RDS PostgreSQL Database${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 RDS_IDENTIFIER="ciot-db-${ENVIRONMENT}"
 RDS_STATUS=$(aws rds describe-db-instances \
@@ -91,7 +91,7 @@ echo ""
 
 # 2. Lambda Function
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "2. Lambda Function"
+echo -e "${YELLOW}2. Lambda Function${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 LAMBDA_NAME="buoy-data-ingest-${ENVIRONMENT}"
 LAMBDA_STATE=$(aws lambda get-function \
@@ -179,7 +179,7 @@ echo ""
 
 # 3. API Gateway
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "3. API Gateway"
+echo -e "${YELLOW}3. API Gateway${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 API_NAME="oil-data-ingest-api-${ENVIRONMENT}"
 # Temporarily disable set -e for API Gateway check
@@ -213,7 +213,7 @@ echo ""
 
 # 4. S3 Bucket
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "4. S3 Bucket"
+echo -e "${YELLOW}4. S3 Bucket${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 BUCKET_NAME="ciot-buoy-data-${ENVIRONMENT}-test"
 # Check if bucket exists (head-bucket returns 0 if exists, non-zero if not)
@@ -252,7 +252,7 @@ echo ""
 
 # 5. Secrets Manager
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "5. Secrets Manager"
+echo -e "${YELLOW}5. Secrets Manager${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 SECRET_NAME="ciot-rds-credentials"
 SECRET_EXISTS=$(aws secretsmanager describe-secret \
@@ -278,7 +278,7 @@ echo ""
 
 # 6. VPC & Networking
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "6. VPC & Networking"
+echo -e "${YELLOW}6. VPC & Networking${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 VPC_NAME="ciot-vpc-${ENVIRONMENT}"
 VPC_ID=$(aws ec2 describe-vpcs \
@@ -338,7 +338,7 @@ echo ""
 
 # 7. Port Configuration
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "7. Port Configuration"
+echo -e "${YELLOW}7. Port Configuration${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 if [ "$RDS_STATUS" == "available" ]; then
     if [ "$RDS_PORT" == "5432" ] && [ "$SG_PORT" == "5432" ]; then
@@ -356,7 +356,7 @@ echo ""
 
 # Summary
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo "Summary"
+echo -e "${YELLOW}Summary${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 if [ $ALL_GOOD -eq 0 ]; then
     echo -e "${GREEN}✓ All deployed services are running normally!${NC}"

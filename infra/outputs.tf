@@ -31,3 +31,36 @@ output "rds_master_user_secret_arn" {
     value       = data.aws_secretsmanager_secret.rds_credentials.arn
     sensitive   = true
 }
+
+# ECR Repository
+output "ecr_repository_url" {
+    description = "URL of the ECR repository"
+    value       = aws_ecr_repository.backend.repository_url
+}
+
+# ECS Cluster
+output "ecs_cluster_name" {
+    description = "Name of the ECS cluster"
+    value       = aws_ecs_cluster.main.name
+}
+
+# Application Load Balancer
+output "alb_dns_name" {
+    description = "DNS name of the Application Load Balancer (for ESP32 access)"
+    value       = aws_lb.backend.dns_name
+}
+
+output "backend_api_url" {
+    description = "Full URL for ESP32 to send data"
+    value       = "http://${aws_lb.backend.dns_name}"
+}
+
+output "frontend_url" {
+    description = "Frontend application URL"
+    value       = "http://${aws_lb.backend.dns_name}"
+}
+
+output "ecr_frontend_repository_url" {
+    description = "URL of the frontend ECR repository"
+    value       = aws_ecr_repository.frontend.repository_url
+}

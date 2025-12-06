@@ -25,6 +25,17 @@ resource "aws_security_group" "rds" {
   }
 }
 
+# Update RDS Security Group to allow ECS tasks
+resource "aws_security_group_rule" "rds_from_ecs" {
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.ecs_tasks.id
+  security_group_id        = aws_security_group.rds.id
+  description              = "PostgreSQL from ECS tasks"
+}
+
 # DB Subnet Group (required for RDS)
 resource "aws_db_subnet_group" "main" {
   name       = "ciot-db-subnet-group-${var.environment}"
