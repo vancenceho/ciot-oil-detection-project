@@ -276,6 +276,7 @@ cd backend
 |     `status`      | Status of all services             |
 | `status-backend`  | Backend service status             |
 | `status-frontend` | Frontend service status            |
+|   `status-all`    | Backend & Frontend service status  |
 |  `health-check`   | Test endpoints                     |
 |  `logs-backend`   | Stream backend logs                |
 |  `logs-frontend`  | Stream frontend logs               |
